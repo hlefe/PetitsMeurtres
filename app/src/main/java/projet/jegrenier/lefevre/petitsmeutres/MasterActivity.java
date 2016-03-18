@@ -82,6 +82,14 @@ public class MasterActivity extends AppCompatActivity {
         final SelectAvatar selectAvatar = new SelectAvatar();
         selectAvatar.show(manager, "TEST2");
     }
+
+    public void startGame(View sender){
+        ennonceEnquete = new EnnonceEnquete();
+        ennonceEnquete.setArguments(getIntent().getExtras());
+        manager.beginTransaction().replace(R.id.container, ennonceEnquete).commit();
+    }
+
+
     private void ajoutPremierJoueur() {
         Resources res = getResources();
         TypedArray avatarArray = res.obtainTypedArray(R.array.array_avatars);
@@ -126,10 +134,6 @@ public class MasterActivity extends AppCompatActivity {
         i = random("Enquêteur","Greffier");
         playerList.get(i).setRole("Coupable");
     }
-    
-    public void startGame(View sender){
-        ennonceEnquete = new EnnonceEnquete();
-        ennonceEnquete.setArguments(getIntent().getExtras());
-        manager.beginTransaction().replace(R.id.container, ennonceEnquete).commit();
-    }
+
+
 }

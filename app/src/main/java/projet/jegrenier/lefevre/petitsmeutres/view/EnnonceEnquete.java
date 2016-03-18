@@ -30,14 +30,17 @@ public class EnnonceEnquete extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.ennonce_enquete,container,false);
         GregorianCalendar date= ((MasterActivity) getContext()).getDate();
-        //((TextView) view.findViewById(R.id.date)).setText(date.getTime().toString());
-        Log.d("DEBUG", date.toString());
-        ((TextView) view.findViewById(R.id.date)).setText(date.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.FRANCE) + " " + date.get(Calendar.DAY_OF_MONTH) + " " + date.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.FRANCE) + " " + date.get(Calendar.YEAR));
+        String dateAAfficher=date.get(Calendar.DAY_OF_MONTH) + " " + date.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.FRANCE);
+        ((TextView) view.findViewById(R.id.date)).setText(date.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.FRANCE) + " " + dateAAfficher+ " " + date.get(Calendar.YEAR));
         SQLiteDatabase database= ((MasterActivity)getContext()).getAssistantBdd().getReadableDatabase();
-        Cursor cursor=database.query("jour", new String[]{"date", "description"}, "date = 'Mardi 2 Mars'", null, null, null, null);
+        Cursor cursor=database.query("jour", new String[]{"date", "description"}, "date = '"+dateAAfficher+"'", null, null, null, null);
         cursor.moveToFirst();
-        String ennonce = cursor.getString(1);
-        ((TextView) view.findViewById(R.id.ennonce)).setText(ennonce);
+        if(cursor.getCount() != 0) {
+            String ennonce = cursor.getString(1);
+            ((TextView) view.findViewById(R.id.ennonce)).setText(ennonce);
+        }else{
+            ((TextView) view.findViewById(R.id.ennonce)).setText("pas d'enquete ce jour");
+        }
         return view;
     }
 }
