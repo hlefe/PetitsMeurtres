@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Petits meutres</string>
+    <string name="welcomeMessage">Bienvenue, n\'hésitez à commencer une partie</string>
+    <string name="startGame">Commencer une partie</string>
+    <string name="setBluetoothBoard">Configurer un plateau de jeu Bluetooth</string>
+    <string name="Valider">Valider</string>
+    <string name="selectAvatar">Selectionner un avatar</string>
+    <string name="cancel">Annuler</string>
+</resources>

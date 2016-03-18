@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="array_avatars">
+        <item>@drawable/ic_av_beige</item>
+        <item>@drawable/ic_av_bleu</item>
+        <item>@drawable/ic_av_bleu_f</item>
+        <item>@drawable/ic_av_jaune</item>
+        <item>@drawable/ic_av_marron</item>
+        <item>@drawable/ic_av_orange</item>
+        <item>@drawable/ic_av_rose</item>
+        <item>@drawable/ic_av_rouge</item>
+        <item>@drawable/ic_av_vert</item>
+        <item>@drawable/ic_av_violet</item>
+    </string-array>
+</resources>

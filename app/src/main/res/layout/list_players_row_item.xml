@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="10dp" >
+
+    <ImageButton
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/avPlayer"
+    android:src="@drawable/ic_av_rouge" />
+
+
+
+    <EditText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:inputType="textPersonName"
+    android:textAppearance="?android:attr/textAppearanceLarge"
+    android:hint="Entrer un surnom"
+    android:ems="10"
+    android:id="@+id/nomJoueur"
+    android:layout_column="2"
+    android:layout_alignBottom="@+id/avPlayer"
+    android:layout_toRightOf="@+id/avPlayer"
+    android:layout_toEndOf="@+id/avPlayer" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/deletePlayer"
+        android:src="@drawable/ic_av_bleu"
+        android:layout_alignTop="@+id/avPlayer"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+</RelativeLayout>
