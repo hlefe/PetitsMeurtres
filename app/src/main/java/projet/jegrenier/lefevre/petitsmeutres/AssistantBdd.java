@@ -66,6 +66,9 @@ public class AssistantBdd extends SQLiteOpenHelper {
                 "VALUES (2,'Mardi 2 Mars','Test insertion');");
         db.execSQL("INSERT INTO jour (id,date,description)" +
                 "VALUES (3,'Mardi 3 Mars','Test insertid');");
+/*Création de la table listeMots*/
+        db.execSQL("INSERT INTO listeMots (id,mot1,mot2,mot3,mot4,mot5,mot6,mot7,mot8,mot9,mot10,mot11,mot12,idJour)" +
+                "VALUES (1,'test','test','test','test','test','test','test','test','test','test','test','test',1);");
 
     }
 

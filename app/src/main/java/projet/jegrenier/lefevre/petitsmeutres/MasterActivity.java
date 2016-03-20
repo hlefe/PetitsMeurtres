@@ -8,8 +8,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.PopupWindow;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Random;
@@ -19,6 +24,7 @@ import java.util.GregorianCalendar;
 import projet.jegrenier.lefevre.petitsmeutres.model.Player;
 import projet.jegrenier.lefevre.petitsmeutres.view.ChoixDate;
 import projet.jegrenier.lefevre.petitsmeutres.view.EnnonceEnquete;
+import projet.jegrenier.lefevre.petitsmeutres.view.ListeMotTimer;
 import projet.jegrenier.lefevre.petitsmeutres.view.StartView;
 import projet.jegrenier.lefevre.petitsmeutres.view.listPlayers.SelectAvatar;
 import projet.jegrenier.lefevre.petitsmeutres.view.listPlayers.SetPlayer;
@@ -35,9 +41,11 @@ public class MasterActivity extends AppCompatActivity {
     private StartView startView;
     private ChoixDate choixJour;
     private SetPlayer setPlayer;
+    private ListeMotTimer listeMotTimer;
     private EnnonceEnquete ennonceEnquete;
     public ArrayList<Player> playerList;
     public Player currentPlayer;
+    public Player inspecteur;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,9 +92,25 @@ public class MasterActivity extends AppCompatActivity {
     }
 
     public void startGame(View sender){
+        //genererLesRolesAleatoirement();
+        for(Player player : playerList){
+            player.setRole("LOL");
+        }
+        playerList.get(0).setRole("Enquêteur");
         ennonceEnquete = new EnnonceEnquete();
         ennonceEnquete.setArguments(getIntent().getExtras());
         manager.beginTransaction().replace(R.id.container, ennonceEnquete).commit();
+        for(Player player : playerList){
+            if(player.getRole() == "Enquêteur" ){
+                inspecteur=player;
+                Log.i("TEST",player.getNickname());
+            }
+        }
+        if(inspecteur != null) {
+            Toast.makeText(this, inspecteur.getNickname(), Toast.LENGTH_LONG).show();
+        }else{
+            Toast.makeText(this, "inspecteur non sélectionné", Toast.LENGTH_LONG).show();
+        }
     }
 
 
