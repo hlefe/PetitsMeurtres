@@ -33,10 +33,11 @@ public class EnnonceEnquete extends Fragment {
         String dateAAfficher=date.get(Calendar.DAY_OF_MONTH) + " " + date.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.FRANCE);
         ((TextView) view.findViewById(R.id.date)).setText(date.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.FRANCE) + " " + dateAAfficher+ " " + date.get(Calendar.YEAR));
         SQLiteDatabase database= ((MasterActivity)getContext()).getAssistantBdd().getReadableDatabase();
-        Cursor cursor=database.query("jour", new String[]{"date", "description"}, "date = '"+dateAAfficher+"'", null, null, null, null);
+        Cursor cursor=database.query("jour", new String[]{"id","date", "description"}, "date = '"+dateAAfficher+"'", null, null, null, null);
         cursor.moveToFirst();
         if(cursor.getCount() != 0) {
-            String ennonce = cursor.getString(1);
+            ((MasterActivity) getContext()).setIdJour(cursor.getInt(0));
+            String ennonce = cursor.getString(2);
             ((TextView) view.findViewById(R.id.ennonce)).setText(ennonce);
         }else{
             ((TextView) view.findViewById(R.id.ennonce)).setText("pas d'enquete ce jour");

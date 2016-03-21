@@ -37,6 +37,9 @@ public class MasterActivity extends AppCompatActivity {
     private GregorianCalendar date;
     public GregorianCalendar getDate() {return date;}
     public void setDate(GregorianCalendar date) {this.date = date;}
+    private int idJour;
+    public int getIdJour() {return idJour;}
+    public void setIdJour(int idJour) {this.idJour = idJour;}
     private FragmentManager manager;
     private StartView startView;
     private ChoixDate choixJour;
@@ -73,10 +76,13 @@ public class MasterActivity extends AppCompatActivity {
     }
 
     public void choixDate(View sender){
-        // Create fragment and give it an argument specifying the article it should show
-        choixJour = new ChoixDate();
-        choixJour.setArguments(getIntent().getExtras());
-        manager.beginTransaction().replace(R.id.container, choixJour).commit();
+       if(playerList.size() >= 4) { // Create fragment and give it an argument specifying the article it should show
+           choixJour = new ChoixDate();
+           choixJour.setArguments(getIntent().getExtras());
+           manager.beginTransaction().replace(R.id.container, choixJour).commit();
+       }else{
+           Toast.makeText(this,"il faut au moins 4 joueur pour commencer a jouer", Toast.LENGTH_LONG);
+       }
     }
 
     public void setPlayer(View sender){
@@ -113,6 +119,12 @@ public class MasterActivity extends AppCompatActivity {
         }
     }
 
+    public void interroger(View sender){
+        listeMotTimer = new ListeMotTimer();
+        listeMotTimer.setArguments(getIntent().getExtras());
+        manager.beginTransaction().replace(R.id.container, listeMotTimer).commit();
+    }
+
 
     private void ajoutPremierJoueur() {
         Resources res = getResources();
@@ -125,6 +137,8 @@ public class MasterActivity extends AppCompatActivity {
         ajoutPremierJoueur();
         setPlayer(sender);
     }
+
+
 
     public int random(String role){
         Random rand = new Random();

@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Chronometer;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import projet.jegrenier.lefevre.petitsmeutres.MasterActivity;
 import projet.jegrenier.lefevre.petitsmeutres.R;
@@ -28,15 +29,15 @@ public class ListeMotTimer extends Fragment {
         ArrayAdapter<String> mArrayAdapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_list_item_1);
         ((ListView) view.findViewById(R.id.listeMots)).setAdapter(mArrayAdapter);
         SQLiteDatabase database= ((MasterActivity)getContext()).getAssistantBdd().getReadableDatabase();
-        Cursor cursor=database.query("listeMots", new String[]{"mot1", "mot2","mot3","mot4","mot5","mot6","mot7","mot8","mot9","mot10","mot11","mot12",}, "idJour = 1", null, null, null, null);
+        Cursor cursor=database.query("listeMots", new String[]{"mot1", "mot2","mot3"}, "idJour = "+((MasterActivity) getContext()).getIdJour(), null, null, null, null);
         cursor.moveToFirst();
         if(cursor.getCount() != 0) {
-            for(int i=0; i<12; i++) {
+            for(int i=0; i<3; i++) {
                 String mot = cursor.getString(i);
                 mArrayAdapter.add(mot);
             }
         }else {
-
+            Toast.makeText(getContext(),"problème lors de la récupération de l'enquête en base de données",Toast.LENGTH_LONG);
         }
         return view;
     }
